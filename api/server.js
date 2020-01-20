@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
       }
       else
       {
-        console.log("Score has been saved successfully")
+        console.log("Score has been saved successfully");
       }
     });
 
