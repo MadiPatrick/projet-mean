@@ -60,8 +60,9 @@ io.on('connection', (socket) => {
   socket.on('join', function (data) {
     socket.join(data.room);
     console.log(data.user + " joined de room " + data.room);
-    socket.broadcast.to(data.room).emit("new user joined", { user: data.user, message: "has joined this room." })
+    socket.broadcast.to(data.room).emit("new user joined", ({user: data.user, message: "has joined this room." }))
   })
+
   socket.on('save_score', function (data) {
     var score = new modelScore();
     score.joueur = data.joueur;
@@ -81,9 +82,28 @@ io.on('connection', (socket) => {
     });
 
   })
+  // socket.on('get_scores', function (data) {
+  //   var paragraphe = new modelParagraphe();
+
+  //   paragraphe.find(function (err, paragraph) {
+  //     if (err) {
+  //       console.log(err)
+  //     }
+  //     if (!score)
+  //     {
+  //       console.log("The score is no in the database");
+  //     }
+  //     else
+  //     {
+  //       emit('get scores',{paragraphe:paragraph})
+  //     }
+  //   });
+  // })
 
 })
+ var paragraphe = new modelParagraphe();
 
+var p =
 app.use("/api", router);
 server.listen(port);
 console.log("le serveur est maitenant en marche sur le port : " + port);
