@@ -100,22 +100,10 @@ io.on('connection', (socket) => {
   //   });
   // })
 
-
 })
+var mes_paragraphe = scoreController.getScores;
 
-var paragraphe = new modelParagraphe();
-paragraphe.find(function (err, paragraph) {
-  if (err) {
-    console.log(err)
-  }
-  if (!score) {
-    console.log("The score is no in the database");
-  }
-  else {
-    console.log("oui")
-  }
-});
-var p =
+
 app.use("/api", router);
 server.listen(port);
 console.log("le serveur est maitenant en marche sur le port : " + port);
