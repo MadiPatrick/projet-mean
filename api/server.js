@@ -100,9 +100,21 @@ io.on('connection', (socket) => {
   //   });
   // })
 
-})
- var paragraphe = new modelParagraphe();
 
+})
+
+var paragraphe = new modelParagraphe();
+paragraphe.find(function (err, paragraph) {
+  if (err) {
+    console.log(err)
+  }
+  if (!score) {
+    console.log("The score is no in the database");
+  }
+  else {
+    console.log("oui")
+  }
+});
 var p =
 app.use("/api", router);
 server.listen(port);
