@@ -101,9 +101,6 @@ io.on('connection', (socket) => {
   // })
 
 })
-var mes_paragraphe = scoreController.getScores;
-
-
 app.use("/api", router);
 server.listen(port);
 console.log("le serveur est maitenant en marche sur le port : " + port);
