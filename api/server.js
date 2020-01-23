@@ -57,10 +57,17 @@ io.on('connection', (socket) => {
 
   console.log("Une nouvelle connexion : " + socket.id);
 
-  socket.on('join', function (data) {
+  socket.on('message', function (message) {
+    message = JSON.parse(message);
+    socket.broadcast.send(JSON.stringify(message));
+    message.type = "myMessage";
+    socket.send(JSON.stringify(message));
+  });
+  socket.on('join', function (data)
+  {
     socket.join(data.room);
     console.log(data.user + " joined de room " + data.room);
-    socket.broadcast.to(data.room).emit("new user joined", ({user: data.user, message: "has joined this room." }))
+    socket.broadcast.to(data.room).emit("new user joined", ({user: data.user, message: "has joined this room."}))
   })
 
   socket.on('save_score', function (data) {
@@ -80,32 +87,12 @@ io.on('connection', (socket) => {
         console.log("Score has been saved successfully");
       }
     });
-
   })
-  // socket.on('get_scores', function (data) {
-  //   var paragraphe = new modelParagraphe();
-
-  //   paragraphe.find(function (err, paragraph) {
-  //     if (err) {
-  //       console.log(err)
-  //     }
-  //     if (!score)
-  //     {
-  //       console.log("The score is no in the database");
-  //     }
-  //     else
-  //     {
-  //       emit('get scores',{paragraphe:paragraph})
-  //     }
-  //   });
-  // })
 
 })
 app.use("/api", router);
 server.listen(port);
 console.log("le serveur est maitenant en marche sur le port : " + port);
-
-
 
 function new_paragraphe(title, slug, content, author)
 {
@@ -116,4 +103,3 @@ function new_paragraphe(title, slug, content, author)
   paragraphe.author = author;
   return paragraphe;
 }
-
